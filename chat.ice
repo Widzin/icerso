@@ -44,7 +44,7 @@ interface GroupServerManager {
 
 interface User {
 	string getName();
-	void receiveText(string msg, User* sender, GroupServer* gServer);
+	void receiveText(string msg, User* sender, string serverName);
 	void receivePrivateText(string msg, User* sender);
 };
 

@@ -2130,73 +2130,73 @@ private:
     
 public:
 
-    void receiveText(const ::std::string& __p_msg, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gServer)
+    void receiveText(const ::std::string& __p_msg, const ::Chat::UserPrx& __p_sender, const ::std::string& __p_serverName)
     {
-        receiveText(__p_msg, __p_sender, __p_gServer, 0);
+        receiveText(__p_msg, __p_sender, __p_serverName, 0);
     }
-    void receiveText(const ::std::string& __p_msg, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gServer, const ::Ice::Context& __ctx)
+    void receiveText(const ::std::string& __p_msg, const ::Chat::UserPrx& __p_sender, const ::std::string& __p_serverName, const ::Ice::Context& __ctx)
     {
-        receiveText(__p_msg, __p_sender, __p_gServer, &__ctx);
+        receiveText(__p_msg, __p_sender, __p_serverName, &__ctx);
     }
 #ifdef ICE_CPP11
     ::Ice::AsyncResultPtr
-    begin_receiveText(const ::std::string& __p_msg, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gServer, const ::IceInternal::Function<void ()>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    begin_receiveText(const ::std::string& __p_msg, const ::Chat::UserPrx& __p_sender, const ::std::string& __p_serverName, const ::IceInternal::Function<void ()>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
     {
-        return begin_receiveText(__p_msg, __p_sender, __p_gServer, 0, new ::IceInternal::Cpp11FnOnewayCallbackNC(__response, __exception, __sent));
+        return begin_receiveText(__p_msg, __p_sender, __p_serverName, 0, new ::IceInternal::Cpp11FnOnewayCallbackNC(__response, __exception, __sent));
     }
     ::Ice::AsyncResultPtr
-    begin_receiveText(const ::std::string& __p_msg, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gServer, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
+    begin_receiveText(const ::std::string& __p_msg, const ::Chat::UserPrx& __p_sender, const ::std::string& __p_serverName, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
     {
-        return begin_receiveText(__p_msg, __p_sender, __p_gServer, 0, ::Ice::newCallback(__completed, __sent), 0);
+        return begin_receiveText(__p_msg, __p_sender, __p_serverName, 0, ::Ice::newCallback(__completed, __sent), 0);
     }
     ::Ice::AsyncResultPtr
-    begin_receiveText(const ::std::string& __p_msg, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gServer, const ::Ice::Context& __ctx, const ::IceInternal::Function<void ()>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    begin_receiveText(const ::std::string& __p_msg, const ::Chat::UserPrx& __p_sender, const ::std::string& __p_serverName, const ::Ice::Context& __ctx, const ::IceInternal::Function<void ()>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
     {
-        return begin_receiveText(__p_msg, __p_sender, __p_gServer, &__ctx, new ::IceInternal::Cpp11FnOnewayCallbackNC(__response, __exception, __sent), 0);
+        return begin_receiveText(__p_msg, __p_sender, __p_serverName, &__ctx, new ::IceInternal::Cpp11FnOnewayCallbackNC(__response, __exception, __sent), 0);
     }
     ::Ice::AsyncResultPtr
-    begin_receiveText(const ::std::string& __p_msg, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gServer, const ::Ice::Context& __ctx, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
+    begin_receiveText(const ::std::string& __p_msg, const ::Chat::UserPrx& __p_sender, const ::std::string& __p_serverName, const ::Ice::Context& __ctx, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
     {
-        return begin_receiveText(__p_msg, __p_sender, __p_gServer, &__ctx, ::Ice::newCallback(__completed, __sent));
+        return begin_receiveText(__p_msg, __p_sender, __p_serverName, &__ctx, ::Ice::newCallback(__completed, __sent));
     }
 #endif
 
-    ::Ice::AsyncResultPtr begin_receiveText(const ::std::string& __p_msg, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gServer)
+    ::Ice::AsyncResultPtr begin_receiveText(const ::std::string& __p_msg, const ::Chat::UserPrx& __p_sender, const ::std::string& __p_serverName)
     {
-        return begin_receiveText(__p_msg, __p_sender, __p_gServer, 0, ::IceInternal::__dummyCallback, 0);
+        return begin_receiveText(__p_msg, __p_sender, __p_serverName, 0, ::IceInternal::__dummyCallback, 0);
     }
 
-    ::Ice::AsyncResultPtr begin_receiveText(const ::std::string& __p_msg, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gServer, const ::Ice::Context& __ctx)
+    ::Ice::AsyncResultPtr begin_receiveText(const ::std::string& __p_msg, const ::Chat::UserPrx& __p_sender, const ::std::string& __p_serverName, const ::Ice::Context& __ctx)
     {
-        return begin_receiveText(__p_msg, __p_sender, __p_gServer, &__ctx, ::IceInternal::__dummyCallback, 0);
+        return begin_receiveText(__p_msg, __p_sender, __p_serverName, &__ctx, ::IceInternal::__dummyCallback, 0);
     }
 
-    ::Ice::AsyncResultPtr begin_receiveText(const ::std::string& __p_msg, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gServer, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    ::Ice::AsyncResultPtr begin_receiveText(const ::std::string& __p_msg, const ::Chat::UserPrx& __p_sender, const ::std::string& __p_serverName, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
     {
-        return begin_receiveText(__p_msg, __p_sender, __p_gServer, 0, __del, __cookie);
+        return begin_receiveText(__p_msg, __p_sender, __p_serverName, 0, __del, __cookie);
     }
 
-    ::Ice::AsyncResultPtr begin_receiveText(const ::std::string& __p_msg, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gServer, const ::Ice::Context& __ctx, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    ::Ice::AsyncResultPtr begin_receiveText(const ::std::string& __p_msg, const ::Chat::UserPrx& __p_sender, const ::std::string& __p_serverName, const ::Ice::Context& __ctx, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
     {
-        return begin_receiveText(__p_msg, __p_sender, __p_gServer, &__ctx, __del, __cookie);
+        return begin_receiveText(__p_msg, __p_sender, __p_serverName, &__ctx, __del, __cookie);
     }
 
-    ::Ice::AsyncResultPtr begin_receiveText(const ::std::string& __p_msg, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gServer, const ::Chat::Callback_User_receiveTextPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    ::Ice::AsyncResultPtr begin_receiveText(const ::std::string& __p_msg, const ::Chat::UserPrx& __p_sender, const ::std::string& __p_serverName, const ::Chat::Callback_User_receiveTextPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
     {
-        return begin_receiveText(__p_msg, __p_sender, __p_gServer, 0, __del, __cookie);
+        return begin_receiveText(__p_msg, __p_sender, __p_serverName, 0, __del, __cookie);
     }
 
-    ::Ice::AsyncResultPtr begin_receiveText(const ::std::string& __p_msg, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gServer, const ::Ice::Context& __ctx, const ::Chat::Callback_User_receiveTextPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    ::Ice::AsyncResultPtr begin_receiveText(const ::std::string& __p_msg, const ::Chat::UserPrx& __p_sender, const ::std::string& __p_serverName, const ::Ice::Context& __ctx, const ::Chat::Callback_User_receiveTextPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
     {
-        return begin_receiveText(__p_msg, __p_sender, __p_gServer, &__ctx, __del, __cookie);
+        return begin_receiveText(__p_msg, __p_sender, __p_serverName, &__ctx, __del, __cookie);
     }
 
     void end_receiveText(const ::Ice::AsyncResultPtr&);
     
 private:
 
-    void receiveText(const ::std::string&, const ::Chat::UserPrx&, const ::Chat::GroupServerPrx&, const ::Ice::Context*);
-    ::Ice::AsyncResultPtr begin_receiveText(const ::std::string&, const ::Chat::UserPrx&, const ::Chat::GroupServerPrx&, const ::Ice::Context*, const ::IceInternal::CallbackBasePtr&, const ::Ice::LocalObjectPtr& __cookie = 0);
+    void receiveText(const ::std::string&, const ::Chat::UserPrx&, const ::std::string&, const ::Ice::Context*);
+    ::Ice::AsyncResultPtr begin_receiveText(const ::std::string&, const ::Chat::UserPrx&, const ::std::string&, const ::Ice::Context*, const ::IceInternal::CallbackBasePtr&, const ::Ice::LocalObjectPtr& __cookie = 0);
     
 public:
 
@@ -2550,7 +2550,7 @@ public:
     virtual ::std::string getName(const ::Ice::Current& = ::Ice::Current()) = 0;
     ::Ice::DispatchStatus ___getName(::IceInternal::Incoming&, const ::Ice::Current&);
 
-    virtual void receiveText(const ::std::string&, const ::Chat::UserPrx&, const ::Chat::GroupServerPrx&, const ::Ice::Current& = ::Ice::Current()) = 0;
+    virtual void receiveText(const ::std::string&, const ::Chat::UserPrx&, const ::std::string&, const ::Ice::Current& = ::Ice::Current()) = 0;
     ::Ice::DispatchStatus ___receiveText(::IceInternal::Incoming&, const ::Ice::Current&);
 
     virtual void receivePrivateText(const ::std::string&, const ::Chat::UserPrx&, const ::Ice::Current& = ::Ice::Current()) = 0;

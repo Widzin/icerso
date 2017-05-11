@@ -2660,7 +2660,7 @@ IceProxy::Chat::User::end_getName(const ::Ice::AsyncResultPtr& __result)
 }
 
 void
-IceProxy::Chat::User::receiveText(const ::std::string& __p_msg, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gServer, const ::Ice::Context* __ctx)
+IceProxy::Chat::User::receiveText(const ::std::string& __p_msg, const ::Chat::UserPrx& __p_sender, const ::std::string& __p_serverName, const ::Ice::Context* __ctx)
 {
     ::IceInternal::Outgoing __og(this, __Chat__User__receiveText_name, ::Ice::Normal, __ctx);
     try
@@ -2668,7 +2668,7 @@ IceProxy::Chat::User::receiveText(const ::std::string& __p_msg, const ::Chat::Us
         ::IceInternal::BasicStream* __os = __og.startWriteParams(::Ice::DefaultFormat);
         __os->write(__p_msg);
         __os->write(__p_sender);
-        __os->write(__p_gServer);
+        __os->write(__p_serverName);
         __og.endWriteParams();
     }
     catch(const ::Ice::LocalException& __ex)
@@ -2679,7 +2679,7 @@ IceProxy::Chat::User::receiveText(const ::std::string& __p_msg, const ::Chat::Us
 }
 
 ::Ice::AsyncResultPtr
-IceProxy::Chat::User::begin_receiveText(const ::std::string& __p_msg, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gServer, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
+IceProxy::Chat::User::begin_receiveText(const ::std::string& __p_msg, const ::Chat::UserPrx& __p_sender, const ::std::string& __p_serverName, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
 {
     ::IceInternal::OutgoingAsyncPtr __result = new ::IceInternal::OutgoingAsync(this, __Chat__User__receiveText_name, __del, __cookie);
     try
@@ -2688,7 +2688,7 @@ IceProxy::Chat::User::begin_receiveText(const ::std::string& __p_msg, const ::Ch
         ::IceInternal::BasicStream* __os = __result->startWriteParams(::Ice::DefaultFormat);
         __os->write(__p_msg);
         __os->write(__p_sender);
-        __os->write(__p_gServer);
+        __os->write(__p_serverName);
         __result->endWriteParams();
         __result->invoke();
     }
@@ -3571,12 +3571,12 @@ Chat::User::___receiveText(::IceInternal::Incoming& __inS, const ::Ice::Current&
     ::IceInternal::BasicStream* __is = __inS.startReadParams();
     ::std::string __p_msg;
     ::Chat::UserPrx __p_sender;
-    ::Chat::GroupServerPrx __p_gServer;
+    ::std::string __p_serverName;
     __is->read(__p_msg);
     __is->read(__p_sender);
-    __is->read(__p_gServer);
+    __is->read(__p_serverName);
     __inS.endReadParams();
-    receiveText(__p_msg, __p_sender, __p_gServer, __current);
+    receiveText(__p_msg, __p_sender, __p_serverName, __current);
     __inS.__writeEmptyParams();
     return ::Ice::DispatchOK;
 }

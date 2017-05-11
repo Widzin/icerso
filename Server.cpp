@@ -12,11 +12,12 @@ int main(int argc, char* argv[])
 		ic = Ice::initialize(argc, argv);
 		Ice::ObjectAdapterPtr adapter
 			= ic->createObjectAdapterWithEndpoints("Adapter", "default -p 10000");
-		Ice::ObjectPtr object = new ChatServerI;
-		Ice::ObjectPtr object2 = new GroupServerI;
+		Ice::ObjectPtr objectChat = new ChatServerI;
+		Ice::ObjectPtr objectManager = new GroupServerManagerI;
+		//Ice::ObjectPtr objectManager = new
 
-		adapter->add(object, ic->stringToIdentity("ChatServer"));
-		adapter->add(object2, ic->stringToIdentity("GroupServer"));
+		adapter->add(objectChat, ic->stringToIdentity("ChatServer"));
+		adapter->add(objectManager, ic->stringToIdentity("Manager"));
 		adapter->activate();
 		cout << "Server started" << endl;
 		ic->waitForShutdown();

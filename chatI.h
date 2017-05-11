@@ -8,10 +8,10 @@ namespace Chat
 
 class ChatServerI : virtual public ChatServer
 {
+
 public:
-
-
-
+	Users limboUserList;
+	Groups groupList;
     virtual void LogIn(const ::Chat::UserPrx&,
                        const Ice::Current&);
 
@@ -34,15 +34,19 @@ public:
 
     virtual void unregisterServer(const ::Chat::GroupServerManagerPrx&,
                                   const Ice::Current&);
+
     virtual ::Chat::UserPrx getUser(const ::std::string& name,
                                    const Ice::Current& current);
 };
 
 class GroupServerI : virtual public GroupServer
 {
+
 public:
 	Users userList;
+	std::string name;
 
+	GroupServerI(const std::string& pName);
     virtual void join(const ::Chat::UserPrx&,
                       const Ice::Current&);
 
@@ -61,6 +65,9 @@ public:
 class GroupServerManagerI : virtual public GroupServerManager
 {
 public:
+	Groups groupList;
+
+	GroupServerManagerI();
 
     virtual ::Chat::GroupServerPrx CreateGroup(const ::std::string&,
                                                const Ice::Current&);
@@ -77,7 +84,7 @@ public:
 class UserI : virtual public User
 {
 public:
-	::std::string myName;
+	std::string myName;
 
 	UserI(const ::std::string& name);
 
@@ -85,7 +92,7 @@ public:
 
     virtual void receiveText(const ::std::string&,
                              const ::Chat::UserPrx&,
-                             const ::Chat::GroupServerPrx&,
+                             const ::std::string&,
                              const Ice::Current&);
 
     virtual void receivePrivateText(const ::std::string&,
