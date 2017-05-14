@@ -12,6 +12,10 @@ class ChatServerI : virtual public ChatServer
 public:
 	Users limboUserList;
 	Groups groupList;
+
+	virtual void LogOut(const ::Chat::UserPrx& callback,
+	                         const Ice::Current& current);
+
     virtual void LogIn(const ::Chat::UserPrx&,
                        const Ice::Current&);
 
@@ -55,6 +59,7 @@ public:
 
     virtual void SendMessage(const ::std::string&,
                              const ::Chat::UserPrx&,
+							 const ::Chat::GroupServerPrx&,
                              const Ice::Current&);
 
     virtual ::Chat::Users UserList(const Ice::Current&);

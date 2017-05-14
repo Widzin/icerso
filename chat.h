@@ -290,8 +290,8 @@ typedef ::IceUtil::Handle< Callback_ChatServer_registerServer_Base> Callback_Cha
 class Callback_ChatServer_unregisterServer_Base : virtual public ::IceInternal::CallbackBase { };
 typedef ::IceUtil::Handle< Callback_ChatServer_unregisterServer_Base> Callback_ChatServer_unregisterServerPtr;
 
-class Callback_ChatServer_getUser_Base : virtual public ::IceInternal::CallbackBase { };
-typedef ::IceUtil::Handle< Callback_ChatServer_getUser_Base> Callback_ChatServer_getUserPtr;
+class Callback_ChatServer_LogOut_Base : virtual public ::IceInternal::CallbackBase { };
+typedef ::IceUtil::Handle< Callback_ChatServer_LogOut_Base> Callback_ChatServer_LogOutPtr;
 
 class Callback_GroupServer_join_Base : virtual public ::IceInternal::CallbackBase { };
 typedef ::IceUtil::Handle< Callback_GroupServer_join_Base> Callback_GroupServer_joinPtr;
@@ -949,79 +949,73 @@ private:
     
 public:
 
-    ::Chat::UserPrx getUser(const ::std::string& __p_name)
+    void LogOut(const ::Chat::UserPrx& __p_callback)
     {
-        return getUser(__p_name, 0);
+        LogOut(__p_callback, 0);
     }
-    ::Chat::UserPrx getUser(const ::std::string& __p_name, const ::Ice::Context& __ctx)
+    void LogOut(const ::Chat::UserPrx& __p_callback, const ::Ice::Context& __ctx)
     {
-        return getUser(__p_name, &__ctx);
+        LogOut(__p_callback, &__ctx);
     }
 #ifdef ICE_CPP11
     ::Ice::AsyncResultPtr
-    begin_getUser(const ::std::string& __p_name, const ::IceInternal::Function<void (const ::Chat::UserPrx&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    begin_LogOut(const ::Chat::UserPrx& __p_callback, const ::IceInternal::Function<void ()>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
     {
-        return __begin_getUser(__p_name, 0, __response, __exception, __sent);
+        return begin_LogOut(__p_callback, 0, new ::IceInternal::Cpp11FnOnewayCallbackNC(__response, __exception, __sent));
     }
     ::Ice::AsyncResultPtr
-    begin_getUser(const ::std::string& __p_name, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
+    begin_LogOut(const ::Chat::UserPrx& __p_callback, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
     {
-        return begin_getUser(__p_name, 0, ::Ice::newCallback(__completed, __sent), 0);
+        return begin_LogOut(__p_callback, 0, ::Ice::newCallback(__completed, __sent), 0);
     }
     ::Ice::AsyncResultPtr
-    begin_getUser(const ::std::string& __p_name, const ::Ice::Context& __ctx, const ::IceInternal::Function<void (const ::Chat::UserPrx&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    begin_LogOut(const ::Chat::UserPrx& __p_callback, const ::Ice::Context& __ctx, const ::IceInternal::Function<void ()>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
     {
-        return __begin_getUser(__p_name, &__ctx, __response, __exception, __sent);
+        return begin_LogOut(__p_callback, &__ctx, new ::IceInternal::Cpp11FnOnewayCallbackNC(__response, __exception, __sent), 0);
     }
     ::Ice::AsyncResultPtr
-    begin_getUser(const ::std::string& __p_name, const ::Ice::Context& __ctx, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
+    begin_LogOut(const ::Chat::UserPrx& __p_callback, const ::Ice::Context& __ctx, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
     {
-        return begin_getUser(__p_name, &__ctx, ::Ice::newCallback(__completed, __sent));
+        return begin_LogOut(__p_callback, &__ctx, ::Ice::newCallback(__completed, __sent));
     }
-    
-private:
-
-    ::Ice::AsyncResultPtr __begin_getUser(const ::std::string& __p_name, const ::Ice::Context* __ctx, const ::IceInternal::Function<void (const ::Chat::UserPrx&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception, const ::IceInternal::Function<void (bool)>& __sent);
-    
-public:
 #endif
 
-    ::Ice::AsyncResultPtr begin_getUser(const ::std::string& __p_name)
+    ::Ice::AsyncResultPtr begin_LogOut(const ::Chat::UserPrx& __p_callback)
     {
-        return begin_getUser(__p_name, 0, ::IceInternal::__dummyCallback, 0);
+        return begin_LogOut(__p_callback, 0, ::IceInternal::__dummyCallback, 0);
     }
 
-    ::Ice::AsyncResultPtr begin_getUser(const ::std::string& __p_name, const ::Ice::Context& __ctx)
+    ::Ice::AsyncResultPtr begin_LogOut(const ::Chat::UserPrx& __p_callback, const ::Ice::Context& __ctx)
     {
-        return begin_getUser(__p_name, &__ctx, ::IceInternal::__dummyCallback, 0);
+        return begin_LogOut(__p_callback, &__ctx, ::IceInternal::__dummyCallback, 0);
     }
 
-    ::Ice::AsyncResultPtr begin_getUser(const ::std::string& __p_name, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    ::Ice::AsyncResultPtr begin_LogOut(const ::Chat::UserPrx& __p_callback, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
     {
-        return begin_getUser(__p_name, 0, __del, __cookie);
+        return begin_LogOut(__p_callback, 0, __del, __cookie);
     }
 
-    ::Ice::AsyncResultPtr begin_getUser(const ::std::string& __p_name, const ::Ice::Context& __ctx, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    ::Ice::AsyncResultPtr begin_LogOut(const ::Chat::UserPrx& __p_callback, const ::Ice::Context& __ctx, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
     {
-        return begin_getUser(__p_name, &__ctx, __del, __cookie);
+        return begin_LogOut(__p_callback, &__ctx, __del, __cookie);
     }
 
-    ::Ice::AsyncResultPtr begin_getUser(const ::std::string& __p_name, const ::Chat::Callback_ChatServer_getUserPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    ::Ice::AsyncResultPtr begin_LogOut(const ::Chat::UserPrx& __p_callback, const ::Chat::Callback_ChatServer_LogOutPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
     {
-        return begin_getUser(__p_name, 0, __del, __cookie);
+        return begin_LogOut(__p_callback, 0, __del, __cookie);
     }
 
-    ::Ice::AsyncResultPtr begin_getUser(const ::std::string& __p_name, const ::Ice::Context& __ctx, const ::Chat::Callback_ChatServer_getUserPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    ::Ice::AsyncResultPtr begin_LogOut(const ::Chat::UserPrx& __p_callback, const ::Ice::Context& __ctx, const ::Chat::Callback_ChatServer_LogOutPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
     {
-        return begin_getUser(__p_name, &__ctx, __del, __cookie);
+        return begin_LogOut(__p_callback, &__ctx, __del, __cookie);
     }
 
-    ::Chat::UserPrx end_getUser(const ::Ice::AsyncResultPtr&);
+    void end_LogOut(const ::Ice::AsyncResultPtr&);
     
 private:
 
-    ::Chat::UserPrx getUser(const ::std::string&, const ::Ice::Context*);
-    ::Ice::AsyncResultPtr begin_getUser(const ::std::string&, const ::Ice::Context*, const ::IceInternal::CallbackBasePtr&, const ::Ice::LocalObjectPtr& __cookie = 0);
+    void LogOut(const ::Chat::UserPrx&, const ::Ice::Context*);
+    ::Ice::AsyncResultPtr begin_LogOut(const ::Chat::UserPrx&, const ::Ice::Context*, const ::IceInternal::CallbackBasePtr&, const ::Ice::LocalObjectPtr& __cookie = 0);
     
 public:
     
@@ -1292,79 +1286,79 @@ private:
     
 public:
 
-    void SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender)
+    void SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gs)
     {
-        SendMessage(__p_message, __p_sender, 0);
+        SendMessage(__p_message, __p_sender, __p_gs, 0);
     }
-    void SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::Ice::Context& __ctx)
+    void SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gs, const ::Ice::Context& __ctx)
     {
-        SendMessage(__p_message, __p_sender, &__ctx);
+        SendMessage(__p_message, __p_sender, __p_gs, &__ctx);
     }
 #ifdef ICE_CPP11
     ::Ice::AsyncResultPtr
-    begin_SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::IceInternal::Function<void ()>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    begin_SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gs, const ::IceInternal::Function<void ()>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
     {
-        return __begin_SendMessage(__p_message, __p_sender, 0, __response, __exception, __sent);
+        return __begin_SendMessage(__p_message, __p_sender, __p_gs, 0, __response, __exception, __sent);
     }
     ::Ice::AsyncResultPtr
-    begin_SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
+    begin_SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gs, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
     {
-        return begin_SendMessage(__p_message, __p_sender, 0, ::Ice::newCallback(__completed, __sent), 0);
+        return begin_SendMessage(__p_message, __p_sender, __p_gs, 0, ::Ice::newCallback(__completed, __sent), 0);
     }
     ::Ice::AsyncResultPtr
-    begin_SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::Ice::Context& __ctx, const ::IceInternal::Function<void ()>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
+    begin_SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gs, const ::Ice::Context& __ctx, const ::IceInternal::Function<void ()>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception = ::IceInternal::Function<void (const ::Ice::Exception&)>(), const ::IceInternal::Function<void (bool)>& __sent = ::IceInternal::Function<void (bool)>())
     {
-        return __begin_SendMessage(__p_message, __p_sender, &__ctx, __response, __exception, __sent);
+        return __begin_SendMessage(__p_message, __p_sender, __p_gs, &__ctx, __response, __exception, __sent);
     }
     ::Ice::AsyncResultPtr
-    begin_SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::Ice::Context& __ctx, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
+    begin_SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gs, const ::Ice::Context& __ctx, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __completed, const ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>& __sent = ::IceInternal::Function<void (const ::Ice::AsyncResultPtr&)>())
     {
-        return begin_SendMessage(__p_message, __p_sender, &__ctx, ::Ice::newCallback(__completed, __sent));
+        return begin_SendMessage(__p_message, __p_sender, __p_gs, &__ctx, ::Ice::newCallback(__completed, __sent));
     }
     
 private:
 
-    ::Ice::AsyncResultPtr __begin_SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::Ice::Context* __ctx, const ::IceInternal::Function<void ()>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception, const ::IceInternal::Function<void (bool)>& __sent);
+    ::Ice::AsyncResultPtr __begin_SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gs, const ::Ice::Context* __ctx, const ::IceInternal::Function<void ()>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception, const ::IceInternal::Function<void (bool)>& __sent);
     
 public:
 #endif
 
-    ::Ice::AsyncResultPtr begin_SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender)
+    ::Ice::AsyncResultPtr begin_SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gs)
     {
-        return begin_SendMessage(__p_message, __p_sender, 0, ::IceInternal::__dummyCallback, 0);
+        return begin_SendMessage(__p_message, __p_sender, __p_gs, 0, ::IceInternal::__dummyCallback, 0);
     }
 
-    ::Ice::AsyncResultPtr begin_SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::Ice::Context& __ctx)
+    ::Ice::AsyncResultPtr begin_SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gs, const ::Ice::Context& __ctx)
     {
-        return begin_SendMessage(__p_message, __p_sender, &__ctx, ::IceInternal::__dummyCallback, 0);
+        return begin_SendMessage(__p_message, __p_sender, __p_gs, &__ctx, ::IceInternal::__dummyCallback, 0);
     }
 
-    ::Ice::AsyncResultPtr begin_SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    ::Ice::AsyncResultPtr begin_SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gs, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
     {
-        return begin_SendMessage(__p_message, __p_sender, 0, __del, __cookie);
+        return begin_SendMessage(__p_message, __p_sender, __p_gs, 0, __del, __cookie);
     }
 
-    ::Ice::AsyncResultPtr begin_SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::Ice::Context& __ctx, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    ::Ice::AsyncResultPtr begin_SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gs, const ::Ice::Context& __ctx, const ::Ice::CallbackPtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
     {
-        return begin_SendMessage(__p_message, __p_sender, &__ctx, __del, __cookie);
+        return begin_SendMessage(__p_message, __p_sender, __p_gs, &__ctx, __del, __cookie);
     }
 
-    ::Ice::AsyncResultPtr begin_SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::Chat::Callback_GroupServer_SendMessagePtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    ::Ice::AsyncResultPtr begin_SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gs, const ::Chat::Callback_GroupServer_SendMessagePtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
     {
-        return begin_SendMessage(__p_message, __p_sender, 0, __del, __cookie);
+        return begin_SendMessage(__p_message, __p_sender, __p_gs, 0, __del, __cookie);
     }
 
-    ::Ice::AsyncResultPtr begin_SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::Ice::Context& __ctx, const ::Chat::Callback_GroupServer_SendMessagePtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
+    ::Ice::AsyncResultPtr begin_SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gs, const ::Ice::Context& __ctx, const ::Chat::Callback_GroupServer_SendMessagePtr& __del, const ::Ice::LocalObjectPtr& __cookie = 0)
     {
-        return begin_SendMessage(__p_message, __p_sender, &__ctx, __del, __cookie);
+        return begin_SendMessage(__p_message, __p_sender, __p_gs, &__ctx, __del, __cookie);
     }
 
     void end_SendMessage(const ::Ice::AsyncResultPtr&);
     
 private:
 
-    void SendMessage(const ::std::string&, const ::Chat::UserPrx&, const ::Ice::Context*);
-    ::Ice::AsyncResultPtr begin_SendMessage(const ::std::string&, const ::Chat::UserPrx&, const ::Ice::Context*, const ::IceInternal::CallbackBasePtr&, const ::Ice::LocalObjectPtr& __cookie = 0);
+    void SendMessage(const ::std::string&, const ::Chat::UserPrx&, const ::Chat::GroupServerPrx&, const ::Ice::Context*);
+    ::Ice::AsyncResultPtr begin_SendMessage(const ::std::string&, const ::Chat::UserPrx&, const ::Chat::GroupServerPrx&, const ::Ice::Context*, const ::IceInternal::CallbackBasePtr&, const ::Ice::LocalObjectPtr& __cookie = 0);
     
 public:
 
@@ -2424,8 +2418,8 @@ public:
     virtual void unregisterServer(const ::Chat::GroupServerManagerPrx&, const ::Ice::Current& = ::Ice::Current()) = 0;
     ::Ice::DispatchStatus ___unregisterServer(::IceInternal::Incoming&, const ::Ice::Current&);
 
-    virtual ::Chat::UserPrx getUser(const ::std::string&, const ::Ice::Current& = ::Ice::Current()) = 0;
-    ::Ice::DispatchStatus ___getUser(::IceInternal::Incoming&, const ::Ice::Current&);
+    virtual void LogOut(const ::Chat::UserPrx&, const ::Ice::Current& = ::Ice::Current()) = 0;
+    ::Ice::DispatchStatus ___LogOut(::IceInternal::Incoming&, const ::Ice::Current&);
 
     virtual ::Ice::DispatchStatus __dispatch(::IceInternal::Incoming&, const ::Ice::Current&);
 
@@ -2464,7 +2458,7 @@ public:
     virtual void Leave(const ::Chat::UserPrx&, const ::Ice::Current& = ::Ice::Current()) = 0;
     ::Ice::DispatchStatus ___Leave(::IceInternal::Incoming&, const ::Ice::Current&);
 
-    virtual void SendMessage(const ::std::string&, const ::Chat::UserPrx&, const ::Ice::Current& = ::Ice::Current()) = 0;
+    virtual void SendMessage(const ::std::string&, const ::Chat::UserPrx&, const ::Chat::GroupServerPrx&, const ::Ice::Current& = ::Ice::Current()) = 0;
     ::Ice::DispatchStatus ___SendMessage(::IceInternal::Incoming&, const ::Ice::Current&);
 
     virtual ::Chat::Users UserList(const ::Ice::Current& = ::Ice::Current()) = 0;
@@ -3523,7 +3517,7 @@ newCallback_ChatServer_unregisterServer(T* instance, void (T::*excb)(const ::Ice
 }
 
 template<class T>
-class CallbackNC_ChatServer_getUser : public Callback_ChatServer_getUser_Base, public ::IceInternal::TwowayCallbackNC<T>
+class CallbackNC_ChatServer_LogOut : public Callback_ChatServer_LogOut_Base, public ::IceInternal::OnewayCallbackNC<T>
 {
 public:
 
@@ -3531,51 +3525,40 @@ public:
 
     typedef void (T::*Exception)(const ::Ice::Exception&);
     typedef void (T::*Sent)(bool);
-    typedef void (T::*Response)(const ::Chat::UserPrx&);
+    typedef void (T::*Response)();
 
-    CallbackNC_ChatServer_getUser(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
-        : ::IceInternal::TwowayCallbackNC<T>(obj, cb != 0, excb, sentcb), _response(cb)
+    CallbackNC_ChatServer_LogOut(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
+        : ::IceInternal::OnewayCallbackNC<T>(obj, cb, excb, sentcb)
     {
     }
-
-    virtual void completed(const ::Ice::AsyncResultPtr& __result) const
-    {
-        ::Chat::ChatServerPrx __proxy = ::Chat::ChatServerPrx::uncheckedCast(__result->getProxy());
-        ::Chat::UserPrx __ret;
-        try
-        {
-            __ret = __proxy->end_getUser(__result);
-        }
-        catch(const ::Ice::Exception& ex)
-        {
-            ::IceInternal::CallbackNC<T>::exception(__result, ex);
-            return;
-        }
-        if(_response)
-        {
-            (::IceInternal::CallbackNC<T>::_callback.get()->*_response)(__ret);
-        }
-    }
-
-    private:
-
-    Response _response;
 };
 
-template<class T> Callback_ChatServer_getUserPtr
-newCallback_ChatServer_getUser(const IceUtil::Handle<T>& instance, void (T::*cb)(const ::Chat::UserPrx&), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+template<class T> Callback_ChatServer_LogOutPtr
+newCallback_ChatServer_LogOut(const IceUtil::Handle<T>& instance, void (T::*cb)(), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
 {
-    return new CallbackNC_ChatServer_getUser<T>(instance, cb, excb, sentcb);
+    return new CallbackNC_ChatServer_LogOut<T>(instance, cb, excb, sentcb);
 }
 
-template<class T> Callback_ChatServer_getUserPtr
-newCallback_ChatServer_getUser(T* instance, void (T::*cb)(const ::Chat::UserPrx&), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+template<class T> Callback_ChatServer_LogOutPtr
+newCallback_ChatServer_LogOut(const IceUtil::Handle<T>& instance, void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
 {
-    return new CallbackNC_ChatServer_getUser<T>(instance, cb, excb, sentcb);
+    return new CallbackNC_ChatServer_LogOut<T>(instance, 0, excb, sentcb);
+}
+
+template<class T> Callback_ChatServer_LogOutPtr
+newCallback_ChatServer_LogOut(T* instance, void (T::*cb)(), void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+{
+    return new CallbackNC_ChatServer_LogOut<T>(instance, cb, excb, sentcb);
+}
+
+template<class T> Callback_ChatServer_LogOutPtr
+newCallback_ChatServer_LogOut(T* instance, void (T::*excb)(const ::Ice::Exception&), void (T::*sentcb)(bool) = 0)
+{
+    return new CallbackNC_ChatServer_LogOut<T>(instance, 0, excb, sentcb);
 }
 
 template<class T, typename CT>
-class Callback_ChatServer_getUser : public Callback_ChatServer_getUser_Base, public ::IceInternal::TwowayCallback<T, CT>
+class Callback_ChatServer_LogOut : public Callback_ChatServer_LogOut_Base, public ::IceInternal::OnewayCallback<T, CT>
 {
 public:
 
@@ -3583,47 +3566,36 @@ public:
 
     typedef void (T::*Exception)(const ::Ice::Exception& , const CT&);
     typedef void (T::*Sent)(bool , const CT&);
-    typedef void (T::*Response)(const ::Chat::UserPrx&, const CT&);
+    typedef void (T::*Response)(const CT&);
 
-    Callback_ChatServer_getUser(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
-        : ::IceInternal::TwowayCallback<T, CT>(obj, cb != 0, excb, sentcb), _response(cb)
+    Callback_ChatServer_LogOut(const TPtr& obj, Response cb, Exception excb, Sent sentcb)
+        : ::IceInternal::OnewayCallback<T, CT>(obj, cb, excb, sentcb)
     {
     }
-
-    virtual void completed(const ::Ice::AsyncResultPtr& __result) const
-    {
-        ::Chat::ChatServerPrx __proxy = ::Chat::ChatServerPrx::uncheckedCast(__result->getProxy());
-        ::Chat::UserPrx __ret;
-        try
-        {
-            __ret = __proxy->end_getUser(__result);
-        }
-        catch(const ::Ice::Exception& ex)
-        {
-            ::IceInternal::Callback<T, CT>::exception(__result, ex);
-            return;
-        }
-        if(_response)
-        {
-            (::IceInternal::Callback<T, CT>::_callback.get()->*_response)(__ret, CT::dynamicCast(__result->getCookie()));
-        }
-    }
-
-    private:
-
-    Response _response;
 };
 
-template<class T, typename CT> Callback_ChatServer_getUserPtr
-newCallback_ChatServer_getUser(const IceUtil::Handle<T>& instance, void (T::*cb)(const ::Chat::UserPrx&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+template<class T, typename CT> Callback_ChatServer_LogOutPtr
+newCallback_ChatServer_LogOut(const IceUtil::Handle<T>& instance, void (T::*cb)(const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
 {
-    return new Callback_ChatServer_getUser<T, CT>(instance, cb, excb, sentcb);
+    return new Callback_ChatServer_LogOut<T, CT>(instance, cb, excb, sentcb);
 }
 
-template<class T, typename CT> Callback_ChatServer_getUserPtr
-newCallback_ChatServer_getUser(T* instance, void (T::*cb)(const ::Chat::UserPrx&, const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+template<class T, typename CT> Callback_ChatServer_LogOutPtr
+newCallback_ChatServer_LogOut(const IceUtil::Handle<T>& instance, void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
 {
-    return new Callback_ChatServer_getUser<T, CT>(instance, cb, excb, sentcb);
+    return new Callback_ChatServer_LogOut<T, CT>(instance, 0, excb, sentcb);
+}
+
+template<class T, typename CT> Callback_ChatServer_LogOutPtr
+newCallback_ChatServer_LogOut(T* instance, void (T::*cb)(const CT&), void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+{
+    return new Callback_ChatServer_LogOut<T, CT>(instance, cb, excb, sentcb);
+}
+
+template<class T, typename CT> Callback_ChatServer_LogOutPtr
+newCallback_ChatServer_LogOut(T* instance, void (T::*excb)(const ::Ice::Exception&, const CT&), void (T::*sentcb)(bool, const CT&) = 0)
+{
+    return new Callback_ChatServer_LogOut<T, CT>(instance, 0, excb, sentcb);
 }
 
 template<class T>

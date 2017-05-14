@@ -59,7 +59,7 @@ const ::std::string __Chat__ChatServer__registerServer_name = "registerServer";
 
 const ::std::string __Chat__ChatServer__unregisterServer_name = "unregisterServer";
 
-const ::std::string __Chat__ChatServer__getUser_name = "getUser";
+const ::std::string __Chat__ChatServer__LogOut_name = "LogOut";
 
 const ::std::string __Chat__GroupServer__join_name = "join";
 
@@ -1305,50 +1305,32 @@ IceProxy::Chat::ChatServer::end_unregisterServer(const ::Ice::AsyncResultPtr& __
     __result->__readEmptyParams();
 }
 
-::Chat::UserPrx
-IceProxy::Chat::ChatServer::getUser(const ::std::string& __p_name, const ::Ice::Context* __ctx)
+void
+IceProxy::Chat::ChatServer::LogOut(const ::Chat::UserPrx& __p_callback, const ::Ice::Context* __ctx)
 {
-    __checkTwowayOnly(__Chat__ChatServer__getUser_name);
-    ::IceInternal::Outgoing __og(this, __Chat__ChatServer__getUser_name, ::Ice::Normal, __ctx);
+    ::IceInternal::Outgoing __og(this, __Chat__ChatServer__LogOut_name, ::Ice::Normal, __ctx);
     try
     {
         ::IceInternal::BasicStream* __os = __og.startWriteParams(::Ice::DefaultFormat);
-        __os->write(__p_name);
+        __os->write(__p_callback);
         __og.endWriteParams();
     }
     catch(const ::Ice::LocalException& __ex)
     {
         __og.abort(__ex);
     }
-    if(!__og.invoke())
-    {
-        try
-        {
-            __og.throwUserException();
-        }
-        catch(const ::Ice::UserException& __ex)
-        {
-            ::Ice::UnknownUserException __uue(__FILE__, __LINE__, __ex.ice_name());
-            throw __uue;
-        }
-    }
-    ::Chat::UserPrx __ret;
-    ::IceInternal::BasicStream* __is = __og.startReadParams();
-    __is->read(__ret);
-    __og.endReadParams();
-    return __ret;
+    __invoke(__og);
 }
 
 ::Ice::AsyncResultPtr
-IceProxy::Chat::ChatServer::begin_getUser(const ::std::string& __p_name, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
+IceProxy::Chat::ChatServer::begin_LogOut(const ::Chat::UserPrx& __p_callback, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
 {
-    __checkAsyncTwowayOnly(__Chat__ChatServer__getUser_name);
-    ::IceInternal::OutgoingAsyncPtr __result = new ::IceInternal::OutgoingAsync(this, __Chat__ChatServer__getUser_name, __del, __cookie);
+    ::IceInternal::OutgoingAsyncPtr __result = new ::IceInternal::OutgoingAsync(this, __Chat__ChatServer__LogOut_name, __del, __cookie);
     try
     {
-        __result->prepare(__Chat__ChatServer__getUser_name, ::Ice::Normal, __ctx);
+        __result->prepare(__Chat__ChatServer__LogOut_name, ::Ice::Normal, __ctx);
         ::IceInternal::BasicStream* __os = __result->startWriteParams(::Ice::DefaultFormat);
-        __os->write(__p_name);
+        __os->write(__p_callback);
         __result->endWriteParams();
         __result->invoke();
     }
@@ -1359,69 +1341,10 @@ IceProxy::Chat::ChatServer::begin_getUser(const ::std::string& __p_name, const :
     return __result;
 }
 
-#ifdef ICE_CPP11
-
-::Ice::AsyncResultPtr
-IceProxy::Chat::ChatServer::__begin_getUser(const ::std::string& __p_name, const ::Ice::Context* __ctx, const ::IceInternal::Function<void (const ::Chat::UserPrx&)>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception, const ::IceInternal::Function<void (bool)>& __sent)
+void
+IceProxy::Chat::ChatServer::end_LogOut(const ::Ice::AsyncResultPtr& __result)
 {
-    class Cpp11CB : public ::IceInternal::Cpp11FnCallbackNC
-    {
-    public:
-
-        Cpp11CB(const ::std::function<void (const ::Chat::UserPrx&)>& responseFunc, const ::std::function<void (const ::Ice::Exception&)>& exceptionFunc, const ::std::function<void (bool)>& sentFunc) :
-            ::IceInternal::Cpp11FnCallbackNC(exceptionFunc, sentFunc),
-            _response(responseFunc)
-        {
-            CallbackBase::checkCallback(true, responseFunc || exceptionFunc != nullptr);
-        }
-
-        virtual void completed(const ::Ice::AsyncResultPtr& __result) const
-        {
-            ::Chat::ChatServerPrx __proxy = ::Chat::ChatServerPrx::uncheckedCast(__result->getProxy());
-            ::Chat::UserPrx __ret;
-            try
-            {
-                __ret = __proxy->end_getUser(__result);
-            }
-            catch(const ::Ice::Exception& ex)
-            {
-                Cpp11FnCallbackNC::exception(__result, ex);
-                return;
-            }
-            if(_response != nullptr)
-            {
-                _response(__ret);
-            }
-        }
-    
-    private:
-        
-        ::std::function<void (const ::Chat::UserPrx&)> _response;
-    };
-    return begin_getUser(__p_name, __ctx, new Cpp11CB(__response, __exception, __sent));
-}
-#endif
-
-::Chat::UserPrx
-IceProxy::Chat::ChatServer::end_getUser(const ::Ice::AsyncResultPtr& __result)
-{
-    ::Ice::AsyncResult::__check(__result, this, __Chat__ChatServer__getUser_name);
-    ::Chat::UserPrx __ret;
-    if(!__result->__wait())
-    {
-        try
-        {
-            __result->__throwUserException();
-        }
-        catch(const ::Ice::UserException& __ex)
-        {
-            throw ::Ice::UnknownUserException(__FILE__, __LINE__, __ex.ice_name());
-        }
-    }
-    ::IceInternal::BasicStream* __is = __result->__startReadParams();
-    __is->read(__ret);
-    __result->__endReadParams();
-    return __ret;
+    __end(__result, __Chat__ChatServer__LogOut_name);
 }
 
 const ::std::string&
@@ -1688,7 +1611,7 @@ IceProxy::Chat::GroupServer::end_Leave(const ::Ice::AsyncResultPtr& __result)
 }
 
 void
-IceProxy::Chat::GroupServer::SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::Ice::Context* __ctx)
+IceProxy::Chat::GroupServer::SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gs, const ::Ice::Context* __ctx)
 {
     __checkTwowayOnly(__Chat__GroupServer__SendMessage_name);
     ::IceInternal::Outgoing __og(this, __Chat__GroupServer__SendMessage_name, ::Ice::Normal, __ctx);
@@ -1697,6 +1620,7 @@ IceProxy::Chat::GroupServer::SendMessage(const ::std::string& __p_message, const
         ::IceInternal::BasicStream* __os = __og.startWriteParams(::Ice::DefaultFormat);
         __os->write(__p_message);
         __os->write(__p_sender);
+        __os->write(__p_gs);
         __og.endWriteParams();
     }
     catch(const ::Ice::LocalException& __ex)
@@ -1722,7 +1646,7 @@ IceProxy::Chat::GroupServer::SendMessage(const ::std::string& __p_message, const
 }
 
 ::Ice::AsyncResultPtr
-IceProxy::Chat::GroupServer::begin_SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
+IceProxy::Chat::GroupServer::begin_SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gs, const ::Ice::Context* __ctx, const ::IceInternal::CallbackBasePtr& __del, const ::Ice::LocalObjectPtr& __cookie)
 {
     __checkAsyncTwowayOnly(__Chat__GroupServer__SendMessage_name);
     ::IceInternal::OutgoingAsyncPtr __result = new ::IceInternal::OutgoingAsync(this, __Chat__GroupServer__SendMessage_name, __del, __cookie);
@@ -1732,6 +1656,7 @@ IceProxy::Chat::GroupServer::begin_SendMessage(const ::std::string& __p_message,
         ::IceInternal::BasicStream* __os = __result->startWriteParams(::Ice::DefaultFormat);
         __os->write(__p_message);
         __os->write(__p_sender);
+        __os->write(__p_gs);
         __result->endWriteParams();
         __result->invoke();
     }
@@ -1745,7 +1670,7 @@ IceProxy::Chat::GroupServer::begin_SendMessage(const ::std::string& __p_message,
 #ifdef ICE_CPP11
 
 ::Ice::AsyncResultPtr
-IceProxy::Chat::GroupServer::__begin_SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::Ice::Context* __ctx, const ::IceInternal::Function<void ()>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception, const ::IceInternal::Function<void (bool)>& __sent)
+IceProxy::Chat::GroupServer::__begin_SendMessage(const ::std::string& __p_message, const ::Chat::UserPrx& __p_sender, const ::Chat::GroupServerPrx& __p_gs, const ::Ice::Context* __ctx, const ::IceInternal::Function<void ()>& __response, const ::IceInternal::Function<void (const ::Ice::Exception&)>& __exception, const ::IceInternal::Function<void (bool)>& __sent)
 {
     class Cpp11CB : public ::IceInternal::Cpp11FnCallbackNC
     {
@@ -1780,7 +1705,7 @@ IceProxy::Chat::GroupServer::__begin_SendMessage(const ::std::string& __p_messag
         
         ::std::function<void ()> _response;
     };
-    return begin_SendMessage(__p_message, __p_sender, __ctx, new Cpp11CB(__response, __exception, __sent));
+    return begin_SendMessage(__p_message, __p_sender, __p_gs, __ctx, new Cpp11CB(__response, __exception, __sent));
 }
 #endif
 
@@ -2958,17 +2883,15 @@ Chat::ChatServer::___unregisterServer(::IceInternal::Incoming& __inS, const ::Ic
 }
 
 ::Ice::DispatchStatus
-Chat::ChatServer::___getUser(::IceInternal::Incoming& __inS, const ::Ice::Current& __current)
+Chat::ChatServer::___LogOut(::IceInternal::Incoming& __inS, const ::Ice::Current& __current)
 {
     __checkMode(::Ice::Normal, __current.mode);
     ::IceInternal::BasicStream* __is = __inS.startReadParams();
-    ::std::string __p_name;
-    __is->read(__p_name);
+    ::Chat::UserPrx __p_callback;
+    __is->read(__p_callback);
     __inS.endReadParams();
-    ::Chat::UserPrx __ret = getUser(__p_name, __current);
-    ::IceInternal::BasicStream* __os = __inS.__startWriteParams(::Ice::DefaultFormat);
-    __os->write(__ret);
-    __inS.__endWriteParams(true);
+    LogOut(__p_callback, __current);
+    __inS.__writeEmptyParams();
     return ::Ice::DispatchOK;
 }
 
@@ -2980,8 +2903,8 @@ const ::std::string __Chat__ChatServer_all[] =
     "DeleteGroup",
     "GroupList",
     "LogIn",
+    "LogOut",
     "getGroupServerByName",
-    "getUser",
     "getUserByName",
     "ice_id",
     "ice_ids",
@@ -3022,11 +2945,11 @@ Chat::ChatServer::__dispatch(::IceInternal::Incoming& in, const ::Ice::Current& 
         }
         case 4:
         {
-            return ___getGroupServerByName(in, current);
+            return ___LogOut(in, current);
         }
         case 5:
         {
-            return ___getUser(in, current);
+            return ___getGroupServerByName(in, current);
         }
         case 6:
         {
@@ -3176,12 +3099,14 @@ Chat::GroupServer::___SendMessage(::IceInternal::Incoming& __inS, const ::Ice::C
     ::IceInternal::BasicStream* __is = __inS.startReadParams();
     ::std::string __p_message;
     ::Chat::UserPrx __p_sender;
+    ::Chat::GroupServerPrx __p_gs;
     __is->read(__p_message);
     __is->read(__p_sender);
+    __is->read(__p_gs);
     __inS.endReadParams();
     try
     {
-        SendMessage(__p_message, __p_sender, __current);
+        SendMessage(__p_message, __p_sender, __p_gs, __current);
         __inS.__writeEmptyParams();
         return ::Ice::DispatchOK;
     }

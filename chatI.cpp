@@ -1,23 +1,48 @@
 #include <chatI.h>
 
 void
+Chat::ChatServerI::LogOut(const ::Chat::UserPrx& callback,
+                         const Ice::Current& current)
+{
+	for(int i =0; i < limboUserList.size(); i++){
+		if(limboUserList[i]->getName().compare(callback->getName()) == 0){
+			limboUserList.erase(limboUserList.begin() + i);
+			return;
+		}
+	}
+}
+
+void
 Chat::ChatServerI::LogIn(const ::Chat::UserPrx& callback,
                          const Ice::Current& current)
 {
-	limboUserList.push_back(callback);
+		for(int i=0; i < limboUserList.size(); i++){
+			if(limboUserList[i]->getName().compare(callback->getName()) == 0){
+				throw Chat::NameAlreadyExists();
+				return;
+			}
+		}
+    	limboUserList.push_back(callback);
+    	std::cout << "User: " << callback->getName() << "joined server" << std::endl;
+    	std::cout << "Users in group:" << std::endl;
+    	for(int i=0;i<limboUserList.size();i++){
+    		std::cout << limboUserList[i]->getName() << std::endl;
+    	}
+    	return;
 }
+
 
 ::Chat::UserPrx
 Chat::ChatServerI::getUserByName(const ::std::string& name,
                                  const Ice::Current& current)
 {
     for(int i=0; i < limboUserList.size(); i++){
-    	Chat::UserPrx prx = limboUserList[i].get();
-    	if(prx->getName().compare(name) == 0){
-    		return prx;
+    	if(limboUserList[i]->getName().compare(name) == 0){
+    		return limboUserList[i];
     	}
     }
-    	return NULL;
+    //throw Chat::NameDoesNotExist();
+    return NULL;
 }
 
 ::Chat::Groups
@@ -36,7 +61,7 @@ Chat::ChatServerI::getGroupServerByName(const ::std::string& name,
 			return prx;
 		}
 	}
-	return NULL;
+	throw Chat::NameDoesNotExist();
 }
 
 void
@@ -79,12 +104,13 @@ void
 Chat::GroupServerI::join(const ::Chat::UserPrx& who,
                          const Ice::Current& current)
 {
-	userList.push_back(who);
-	std::cout << "User: " << who->getName() << "joined server" << std::endl;
-	std::cout << "Users in group:" << std::endl;
-	for(int i=0;i<userList.size();i++){
-		std::cout << userList[i]->getName() << std::endl;
+	for(int i =0; i<userList.size(); i++){
+		if(userList[i]->getName().compare(who->getName()) == 0){
+			throw Chat::UserAlreadyRegistered();
+			return;
+		}
 	}
+	userList.push_back(who);
 
 }
 
@@ -100,18 +126,31 @@ Chat::GroupServerI::Leave(const ::Chat::UserPrx& who,
 			return;
 		}
 	}
+	throw Chat::UserDoesNotExist();
 }
 
 void
 Chat::GroupServerI::SendMessage(const ::std::string& message,
                                 const ::Chat::UserPrx& sender,
+								const ::Chat::GroupServerPrx& gs,
                                 const Ice::Current& current)
 {
+	bool isOnList = false;
 	std::string nameSender = sender->getName();
-	for(int i=0; i<userList.size(); i++){
-		if(userList[i]->getName().compare(nameSender) != 0){
-			userList[i]->receiveText(message, sender, name);
+	for(int i =0; i<userList.size(); i++){
+		if(userList[i]->getName().compare(nameSender) == 0){
+			isOnList = true;
 		}
+	}
+	if(isOnList == true){
+		for(int i=0; i<userList.size(); i++){
+					if(userList[i]->getName().compare(nameSender) != 0){
+						userList[i]->receiveText(message, sender, gs->Name());
+					}
+				}
+	}else{
+		throw Chat::UserDoesNotExist();
+		return;
 	}
 }
 
@@ -135,6 +174,12 @@ Chat::GroupServerI::GroupServerI(const ::std::string& pName){
 Chat::GroupServerManagerI::CreateGroup(const ::std::string& name,
                                        const Ice::Current& current)
 {
+	for(int i=0; i < groupList.size(); i++){
+		if(groupList[i]->Name().compare(name) == 0){
+			throw Chat::NameAlreadyExists();
+			return NULL;
+		}
+	}
     GroupServerPtr servant = new GroupServerI(name);
     GroupServerPrx prx  = GroupServerPrx::uncheckedCast(current.adapter->addWithUUID(servant));
     groupList.push_back(prx);
@@ -158,6 +203,7 @@ Chat::GroupServerManagerI::DeleteGroup(const ::std::string& name,
 			return;
 		}
 	}
+	throw Chat::NameDoesNotExist();
 }
 
 ::Chat::GroupServerPrx

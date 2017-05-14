@@ -24,13 +24,13 @@ interface ChatServer {
 	void registerServer(GroupServerManager* serverManager) throws ServerAlreadyRegistered;
 	void unregisterServer(GroupServerManager* serverManager) throws ServerDoesNotExist;
 	
-	User* getUser(string name);
+	void LogOut(User* callback);
 };
 
 interface GroupServer {
 	void join(User* who)  throws UserAlreadyRegistered;
 	void Leave(User* who) throws UserDoesNotExist;
-	void SendMessage(string message, User* sender) throws UserDoesNotExist;
+	void SendMessage(string message, User* sender, GroupServer* gs) throws UserDoesNotExist;
 	Users UserList();
 	string Name();
 };
